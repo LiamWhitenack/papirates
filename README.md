@@ -6,15 +6,6 @@
 ```sh
 gleam add papirates@1
 ```
-```gleam
-import papirates
-
-pub fn main() -> Nil {
-  // TODO: An example of the project in use
-}
-```
-
-Further documentation can be found at <https://papirates.hexdocs.pm/>.
 
 ## Development
 
@@ -22,3 +13,8 @@ Further documentation can be found at <https://papirates.hexdocs.pm/>.
 gleam run   # Run the project
 gleam test  # Run the tests
 ```
+
+## Progress
+
+Working through [this tutorial]https://lukwol.github.io/gleam-guide/:
+Currently stuck on [this step](https://lukwol.github.io/gleam-guide/server/03-database-migrations.html), the docker migration isn't working:
