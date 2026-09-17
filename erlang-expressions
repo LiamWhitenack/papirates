@@ -1,0 +1,9 @@
+1> shell:strings(true).
+2> application:ensure_all_started(pgo).
+3> Config = config:load().
+4> DbPoolName = database:start(Config).
+5> Context = {context, Config, DbPoolName}.
+6> DbConn = context:db_conn(Context).
+7> Query = pog:query("SELECT 1").
+8> pog:execute(Query, DbConn).
+% {ok,{returned,1,[nil]}}

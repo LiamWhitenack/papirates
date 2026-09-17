@@ -14,3 +14,6 @@ connect_to_postgres:
 
 update-orm:
     cd server && direnv exec . gleam run -m squirrel
+
+get-new-server-key:
+    openssl rand -hex 64
