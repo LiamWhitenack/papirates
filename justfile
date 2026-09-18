@@ -7,7 +7,7 @@ decompose:
 migrate:
     docker compose logs migrate
     
-connect_to_postgres:
+connect-to-postgres:
     docker compose exec db psql -U papirates-user-dev -d papirates-dev
     # alternatively, `psql -h localhost -p 5432 -U papirates-user-dev -d papirates-dev`
 
@@ -17,3 +17,8 @@ update-orm:
 
 get-new-server-key:
     openssl rand -hex 64
+
+open-shell:
+    docker compose up -d
+    cd server
+    direnv exec . gleam shell
