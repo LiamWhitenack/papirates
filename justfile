@@ -18,7 +18,8 @@ update-orm:
 get-new-server-key:
     openssl rand -hex 64
 
-open-shell:
-    docker compose up -d
-    cd server
-    direnv exec . gleam shell
+shell directory=".":
+    cd {{directory}} && direnv exec . gleam shell
+
+test directory=".":
+    cd {{directory}} && direnv exec . gleam test
