@@ -7,16 +7,16 @@ FROM ghcr.io/gleam-lang/gleam:${GLEAM_VERSION}-scratch AS gleam
 
 FROM erlang:${ERLANG_VERSION}-alpine AS build                     
 COPY --from=gleam /bin/gleam /bin/gleam
-WORKDIR /doable/server
-COPY shared/gleam.toml /doable/shared/gleam.toml                  
+WORKDIR /papirates/server
+COPY shared/gleam.toml /papirates/shared/gleam.toml                  
 COPY server/gleam.toml server/manifest.toml ./                    
 RUN gleam deps download                                           
-COPY shared/ /doable/shared/                                      
+COPY shared/ /papirates/shared/                                      
 COPY server/ ./                                                   
 RUN gleam export erlang-shipment
 
 FROM erlang:${ERLANG_VERSION}-alpine                              
-COPY --from=build /doable/server/build/erlang-shipment /doable-server
-WORKDIR /doable-server
-ENTRYPOINT ["/bin/sh", "/doable-server/entrypoint.sh"]
+COPY --from=build /papirates/server/build/erlang-shipment /papirates-server
+WORKDIR /papirates-server
+ENTRYPOINT ["/bin/sh", "/papirates-server/entrypoint.sh"]
 CMD ["run"]
