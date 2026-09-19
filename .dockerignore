@@ -1,0 +1,8 @@
+# .dockerignore
+
+# Git
+.git
+
+# Gleam
+**/build
+erl_crash.dump
