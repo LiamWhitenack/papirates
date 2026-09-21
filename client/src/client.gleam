@@ -27,6 +27,14 @@ pub fn init(_) -> #(Model, Effect(Msg)) {
   #(Model(tasks: Ok([]), loading: True), fetch_tasks())
 }
 
+fn fetch_tasks() -> Effect(Msg) {
+  use dispatch <- effect.from
+  api.get("/api/tasks", decode.list(task.task_decoder()))
+  |> promise.map(ApiReturnedTasks)
+  |> promise.tap(dispatch)
+  Nil
+}
+
 pub fn update(_model: Model, msg: Msg) -> #(Model, Effect(Msg)) {
   case msg {
     ApiReturnedTasks(Ok(tasks)) -> #(
@@ -38,14 +46,6 @@ pub fn update(_model: Model, msg: Msg) -> #(Model, Effect(Msg)) {
       effect.none(),
     )
   }
-}
-
-fn fetch_tasks() -> Effect(Msg) {
-  use dispatch <- effect.from
-  api.get("/api/tasks", decode.list(task.task_decoder()))
-  |> promise.map(ApiReturnedTasks)
-  |> promise.tap(dispatch)
-  Nil
 }
 
 pub fn view(model: Model) -> Element(Msg) {

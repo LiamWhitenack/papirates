@@ -18,8 +18,11 @@ update-orm:
 get-new-server-key:
     openssl rand -hex 64
 
-shell directory=".":
+start directory:
+    cd {{directory}} && direnv exec . gleam run -m lustre/dev start
+
+shell directory:
     cd {{directory}} && direnv exec . gleam shell
 
-test directory=".":
+test directory:
     cd {{directory}} && direnv exec . gleam test
