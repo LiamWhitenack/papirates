@@ -26,3 +26,9 @@ shell directory:
 
 test directory:
     cd {{directory}} && direnv exec . gleam test
+
+unmigrate:
+    docker compose run --rm migrate \
+    -path /migrations \
+    -database 'postgres://papirates-user-dev:papirates-dev-p@ssw0rd@db:5432/papirates-dev?sslmode=disable' \
+    force 1
