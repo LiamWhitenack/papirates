@@ -1,4 +1,4 @@
-name: doable-dev
+name: papirates-dev
 
 services:
   db:
@@ -69,8 +69,8 @@ services:
 
 volumes:
   data:
-    name: doable-dev-data
+    name: papirates-dev-data
 
 networks:
   default:
-    name: doable-dev-network
+    name: papirates-dev-network
