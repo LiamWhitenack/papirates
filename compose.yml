@@ -1,6 +1,4 @@
-# compose.yml
-
-name: papirates-dev
+name: doable-dev
 
 services:
   db:
@@ -36,6 +34,18 @@ services:
       db:
         condition: service_healthy
 
+  migrate-test:
+    image: migrate/migrate
+    volumes:
+      - ./migrations:/migrations
+    command: >
+      -path /migrations
+      -database postgres://${PGUSER}:${PGPASSWORD}@${PGHOST}:${PGPORT}/${TEST_DB_NAME}?sslmode=disable
+      up
+    depends_on:
+      db:
+        condition: service_healthy
+
   server:
     build:
       context: .
@@ -57,22 +67,10 @@ services:
       migrate:
         condition: service_completed_successfully
 
-  migrate-test:
-    image: migrate/migrate
-    volumes:
-      - ./migrations:/migrations
-    command: >
-      -path /migrations
-      -database postgres://${PGUSER}:${PGPASSWORD}@${PGHOST}:${PGPORT}/${TEST_DB_NAME}?sslmode=disable
-      up
-    depends_on:
-      db:
-        condition: service_healthy
-
 volumes:
   data:
-    name: papirates-dev-data
+    name: doable-dev-data
 
 networks:
   default:
-    name: papirates-dev-network
+    name: doable-dev-network
