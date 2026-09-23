@@ -5,6 +5,7 @@
 
 CREATE TABLE polyhedrons (
     id varchar NOT NULL,
+	name varchar,
 	CONSTRAINT polyhedrons_pk PRIMARY KEY (id)
 );
 

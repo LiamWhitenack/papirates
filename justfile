@@ -4,6 +4,12 @@ compose:
 decompose:
     docker compose down
 
+restart:
+    docker compose down -v
+    docker compose up -d
+    just migrate
+
+
 migrate:
     docker compose logs migrate
     
@@ -31,4 +37,4 @@ unmigrate:
     docker compose run --rm migrate \
     -path /migrations \
     -database 'postgres://papirates-user-dev:papirates-dev-p@ssw0rd@db:5432/papirates-dev?sslmode=disable' \
-    force 1
+    down
