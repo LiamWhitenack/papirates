@@ -1,3 +1,4 @@
-SELECT id, name
+SELECT
+    id,
+    readable_id
 FROM polyhedrons
-WHERE name IS NOT NULL

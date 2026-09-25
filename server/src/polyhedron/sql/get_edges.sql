@@ -2,5 +2,5 @@ SELECT
     a,
     b
 FROM edges
-WHERE polyhedron = $1
+WHERE face = $1
 ORDER BY a, b;

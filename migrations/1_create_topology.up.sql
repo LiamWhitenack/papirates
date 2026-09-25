@@ -5,56 +5,47 @@
 
 CREATE TABLE polyhedrons (
     id varchar NOT NULL,
-	name varchar,
-	CONSTRAINT polyhedrons_pk PRIMARY KEY (id)
+    readable_id varchar,
+    CONSTRAINT polyhedrons_pk PRIMARY KEY (id)
 );
 
--- vertices definition
+-- unit_vectors definition
 
-CREATE TABLE vertices (
-    polyhedron varchar NOT NULL REFERENCES polyhedrons(id),
-    id INTEGER GENERATED ALWAYS AS IDENTITY NOT NULL,
+CREATE TABLE unit_vectors (
+    id varchar NOT NULL,
 
     x double precision NOT NULL,
     y double precision NOT NULL,
     z double precision NOT NULL,
+    latitude double precision NOT NULL,
+    longitude double precision NOT NULL,
 
-    latitude double precision
-        GENERATED ALWAYS AS (degrees(asin(z))) STORED,
-
-    longitude double precision
-        GENERATED ALWAYS AS (degrees(atan2(y, x))) STORED,
-
-    CONSTRAINT vertices_pk PRIMARY KEY (id)
-);
-
--- edges definition
-
-CREATE TABLE edges (
-    polyhedron varchar NOT NULL REFERENCES polyhedrons(id),
-    a INTEGER NOT NULL REFERENCES vertices(id),
-    b INTEGER NOT NULL REFERENCES vertices(id),
-
-    CONSTRAINT edges_pk PRIMARY KEY (a, b),
-    CONSTRAINT edges_ordered CHECK (a < b)
+    CONSTRAINT unit_vectors_pk PRIMARY KEY (id),
+    CONSTRAINT unit_vectors_spherical_check
+    CHECK (abs(x * x + y * y + z * z - 1) < 1e-10)
 );
 
 -- faces definition
 
 CREATE TABLE faces (
-    polyhedron varchar NOT NULL REFERENCES polyhedrons(id),
-    id INTEGER GENERATED ALWAYS AS IDENTITY NOT NULL,
+    id varchar NOT NULL,
 
-    centroid_x double precision NOT NULL,
-    centroid_y double precision NOT NULL,
-    centroid_z double precision NOT NULL,
-
-    centroid_latitude double precision
-        GENERATED ALWAYS AS (degrees(asin(centroid_z))) STORED,
-
-    centroid_longitude double precision
-        GENERATED ALWAYS AS (degrees(atan2(centroid_y, centroid_x))) STORED,
+    polyhedron varchar NOT NULL REFERENCES polyhedrons (id),
+    centroid integer NOT NULL REFERENCES unit_vectors (id),
 
     CONSTRAINT faces_pk PRIMARY KEY (id)
 
+);
+
+-- edges definition
+
+CREATE TABLE edges (
+    id varchar NOT NULL,
+
+    face integer NOT NULL REFERENCES faces (id),
+    a integer NOT NULL REFERENCES unit_vectors (id),
+    b integer NOT NULL REFERENCES unit_vectors (id),
+
+    CONSTRAINT edges_pk PRIMARY KEY (a, b),
+    CONSTRAINT edges_ordered CHECK (a < b)
 );

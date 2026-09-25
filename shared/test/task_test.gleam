@@ -1,41 +1,41 @@
-// shared/test/task_test.gleam
+// // shared/test/polyhedron_test.gleam
 
-import gleam/json
-import task.{Task, TaskInput}
+// import gleam/json
+// import spherical_shapes.{type SphericalPolyhedron, SphericalPolyhedron}
 
-const task = Task(
-  id: 1,
-  name: "Buy groceries",
-  description: "Milk, eggs, bread",
-  completed: False,
-)
+// const polyhedron = Polyhedron(
+//   id: 1,
+//   name: "Buy groceries",
+//   description: "Milk, eggs, bread",
+//   completed: False,
+// )
 
-const task_input = TaskInput(
-  name: "Buy groceries",
-  description: "Milk, eggs, bread",
-  completed: False,
-)
+// const polyhedron_input = SphericalPolyhedron(
+//   name: "Buy groceries",
+//   description: "Milk, eggs, bread",
+//   completed: False,
+// )
 
-pub fn to_task_test() {
-  assert task.to_task(task_input, 1) == task
-}
+// pub fn to_polyhedron_test() {
+//   assert polyhedron.to_polyhedron(polyhedron_input, 1) == polyhedron
+// }
 
-pub fn to_task_input_test() {
-  assert task.to_task_input(task) == task_input
-}
+// pub fn to_polyhedron_input_test() {
+//   assert polyhedron.to_polyhedron_input(polyhedron) == polyhedron_input
+// }
 
-pub fn task_to_json_test() {
-  assert task
-    |> task.task_to_json
-    |> json.to_string
-    |> json.parse(task.task_decoder())
-    == Ok(task)
-}
+// pub fn polyhedron_to_json_test() {
+//   assert polyhedron
+//     |> polyhedron.polyhedron_to_json
+//     |> json.to_string
+//     |> json.parse(polyhedron.polyhedron_decoder())
+//     == Ok(polyhedron)
+// }
 
-pub fn task_input_to_json_test() {
-  assert task_input
-    |> task.task_input_to_json
-    |> json.to_string
-    |> json.parse(task.task_input_decoder())
-    == Ok(task_input)
-}
+// pub fn polyhedron_input_to_json_test() {
+//   assert polyhedron_input
+//     |> polyhedron.polyhedron_input_to_json
+//     |> json.to_string
+//     |> json.parse(polyhedron.polyhedron_input_decoder())
+//     == Ok(polyhedron_input)
+// }

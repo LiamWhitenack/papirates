@@ -5,6 +5,5 @@ SELECT
     z,
     latitude,
     longitude
-FROM vertices
-WHERE polyhedron = $1
+FROM unit_vectors
 ORDER BY id;

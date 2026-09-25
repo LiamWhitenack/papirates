@@ -12,5 +12,7 @@
   "sqlfluff.dialect": "postgres",
   "sqlfluff.linter.run": "onSave",
   "sqlfluff.format.enabled": true,
-  "workbench.colorTheme": "Gleam"
+  "workbench.colorTheme": "Gleam",
+  "vscode-just.runInTerminal": true,
+  "vscode-just.useSingleTerminal": true
 }
