@@ -7,5 +7,10 @@
   },
   "files.watcherExclude": {
     "**/build/**": true
-  }
+  },
+
+  "sqlfluff.dialect": "postgres",
+  "sqlfluff.linter.run": "onSave",
+  "sqlfluff.format.enabled": true,
+  "workbench.colorTheme": "Gleam"
 }
